@@ -13,8 +13,10 @@ function paintToDo(newToDo){
     btn.addEventListener("click",deleteToDo);
 
     function deleteToDo(event){
-        span.innerText="finish";
-        console.log(event);
+        //console.log(event.target.parentElement);
+        //뭐가 클릭되었는지 알수있게 하는 첫번째 방법 누른 대상의 부모를 알수있다.
+        console.log(event.target.parentElement.innerText);
+        //클릭된 대상의 content를 알수있다.
     }
     
     li.appendChild(span);
