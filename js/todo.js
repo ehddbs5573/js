@@ -68,3 +68,24 @@ function saveToDos(){
 }
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
+
+
+if(savedToDos!==null){
+    const parsedToDos = JSON.parse(savedToDos);
+    //localStorag에 저장된 값을 가진 변수는 string이었다.
+    //ㄴ참고 -> localStorage.setItem(TODOS_KEY,JSON.stringify(toDos));
+    //string을 JSON.parse(savedToDos)을 이용하여 arrey로 바꿈 
+    
+    parsedToDos.forEach((item) => console.log("this is ",item));
+    //arrey의 요소들을 console.log("this is ",item)에 대입한다.
+    
+    //다르게 쓰는법 
+    //parsedToDos.forEach(sayItem);
+    //arrey의 각각 요소에 함수를 쓰게한다
+    //js가 함수를 써야하므로 ()를빼고 대입한다.
+}
+
+function sayItem(item){
+    console.log(item);
+    //item은 지금 처리되고 있는 데이터를 말한다 -> 이 함수가 쓰이는 곳을 봐라 -> localStorage에 저장된 값들
+}
