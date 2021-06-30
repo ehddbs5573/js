@@ -2,6 +2,8 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
+const toDos = [];
+
 toDoForm.addEventListener("submit",handleToDoSubmit);
 
 function paintToDo(newToDo){
@@ -14,9 +16,13 @@ function paintToDo(newToDo){
 
     function deleteToDo(event){
         //console.log(event.target.parentElement);
-        //뭐가 클릭되었는지 알수있게 하는 첫번째 방법 누른 대상의 부모를 알수있다.
-        console.log(event.target.parentElement.innerText);
+        //누른 대상의 부모를 알수있다.
+        //console.log(event.target.parentElement.innerText);
         //클릭된 대상의 content를 알수있다.
+        const li = event.target.parentElement;
+        // 누른 대상의 부모<li>를 변수에 넣는다.
+        li.remove();
+        //변수를 제거한다. -> li이 제거됨 -> x버튼 누르면 해당 list가 제거된다.
     }
     
     li.appendChild(span);
@@ -41,5 +47,24 @@ function handleToDoSubmit(event){
     toDoInput.value = "";
     // <input/>에 값을 입력하고 enter를 눌러서 submit하면 다시 빈칸이되서 다시 입력할수 있다. 
     
+    toDos.push(newToDo);
+    //<input />에 저장된 값을 arrey에 저장시킨다.
+
     paintToDo(newToDo);
+
+    saveToDos();
+    // arrey를 localStorage에 저장한다. 
 }
+
+const TODOS_KEY = "todos";
+
+function saveToDos(){
+    localStorage.setItem(TODOS_KEY,JSON.stringify(toDos));
+    //JSON.stringify(toDos) arrey인 toDos를 string로 바꿔서 localStorage에 저장시키려고함
+    //JSON.stringify(toDos)안쓸때 예시 a,b,c입력 -> a,b,c저장
+    //JSON.stringify(toDos)쓸때 예시 a,b,c입력 -> ["a","b","c"]
+
+    //Json.parse(); string -> arrey
+}
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
